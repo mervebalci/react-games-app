@@ -5,7 +5,7 @@ function App() {
     <div>
       <ListGroup />
     </div>
-  )
+  );
 }
 
 export default App;
