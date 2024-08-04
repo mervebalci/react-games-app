@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./ListGroup.css";
 import styled from "styled-components";
+import { BsCalendar2DateFill } from "react-icons/bs";
 
 const List = styled.ul`
   list-style: none;
@@ -29,6 +30,7 @@ function ListGroup({ items, heading, onSelectItem }: Props) {
 
   return (
     <>
+      <BsCalendar2DateFill size={64} color="red" />
       <h1>{heading}</h1>
       {items.length === 0 && <p>No City Found</p>}
       <List>
