@@ -2,6 +2,7 @@ import "./App.css";
 import ListGroup from "./components/ListGroup";
 import Button from "./components/Button/Button";
 import Like from "./components/Like/Like";
+import Message from "./components/Message";
 
 function App() {
   let cities = [
@@ -24,6 +25,10 @@ function App() {
         <Button children="Click Me!" onClick={() => {}}></Button>
       </div>
       <Like onClick={() => console.log("Clicked!")} />
+
+      <Message />
+      <Message />
+      <Message />
     </>
   );
 }
