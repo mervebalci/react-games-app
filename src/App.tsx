@@ -1,5 +1,6 @@
-import ListGroup from "./components/ListGroup";
 import "./App.css";
+import ListGroup from "./components/ListGroup";
+import Button from "./components/Button/Button";
 
 function App() {
   let cities = [
@@ -18,6 +19,7 @@ function App() {
         heading="My Vacation List"
         onSelectItem={() => {}}
       />
+      <Button children="Click Me!" onClick={() => {}}></Button>
     </div>
   );
 }
