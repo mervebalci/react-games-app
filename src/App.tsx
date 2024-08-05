@@ -3,6 +3,7 @@ import ListGroup from "./components/ListGroup";
 import Button from "./components/Button/Button";
 import Like from "./components/Like/Like";
 import Message from "./components/Message";
+import DrinkMenu from "./components/DrinkMenu";
 
 function App() {
   let cities = [
@@ -29,6 +30,8 @@ function App() {
       <Message />
       <Message />
       <Message />
+
+      <DrinkMenu />
     </>
   );
 }
