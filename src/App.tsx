@@ -6,6 +6,7 @@ import Message from "./components/Message";
 import DrinkMenu from "./components/DrinkMenu";
 import Info from "./components/Info";
 import Tag from "./components/Tag";
+import Bug from "./components/Bug";
 
 function App() {
   let cities = [
@@ -38,6 +39,8 @@ function App() {
       <Info />
 
       <Tag />
+
+      <Bug />
     </>
   );
 }
