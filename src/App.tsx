@@ -4,6 +4,7 @@ import Button from "./components/Button/Button";
 import Like from "./components/Like/Like";
 import Message from "./components/Message";
 import DrinkMenu from "./components/DrinkMenu";
+import Info from "./components/Info";
 
 function App() {
   let cities = [
@@ -32,6 +33,8 @@ function App() {
       <Message />
 
       <DrinkMenu />
+
+      <Info />
     </>
   );
 }
