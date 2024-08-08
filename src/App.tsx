@@ -7,6 +7,7 @@ import DrinkMenu from "./components/DrinkMenu";
 import Info from "./components/Info";
 import Tag from "./components/Tag";
 import Bug from "./components/Bug";
+import Shopping from "./components/E-commerce/Shopping";
 
 function App() {
   let cities = [
@@ -41,6 +42,10 @@ function App() {
       <Tag />
 
       <Bug />
+
+      <div>
+        <Shopping />
+      </div>
     </>
   );
 }
