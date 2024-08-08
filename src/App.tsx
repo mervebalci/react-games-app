@@ -5,6 +5,7 @@ import Like from "./components/Like/Like";
 import Message from "./components/Message";
 import DrinkMenu from "./components/DrinkMenu";
 import Info from "./components/Info";
+import Tag from "./components/Tag";
 
 function App() {
   let cities = [
@@ -35,6 +36,8 @@ function App() {
       <DrinkMenu />
 
       <Info />
+
+      <Tag />
     </>
   );
 }
