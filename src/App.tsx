@@ -8,6 +8,7 @@ import Info from "./components/Info";
 import Tag from "./components/Tag";
 import Bug from "./components/Bug";
 import Shopping from "./components/E-commerce/Shopping";
+import Game from "./components/Game";
 
 function App() {
   let cities = [
@@ -46,6 +47,8 @@ function App() {
       <div>
         <Shopping />
       </div>
+
+      <Game />
     </>
   );
 }
