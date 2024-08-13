@@ -10,6 +10,7 @@ import Bug from "./components/Bug";
 import Shopping from "./components/E-commerce/Shopping";
 import Game from "./components/Game";
 import Pizza from "./components/Pizza";
+import ShoppingCart from "./components/ShoppingCart";
 
 function App() {
   let cities = [
@@ -52,6 +53,8 @@ function App() {
       <Game />
 
       <Pizza />
+
+      <ShoppingCart />
     </>
   );
 }
