@@ -9,6 +9,7 @@ import Tag from "./components/Tag";
 import Bug from "./components/Bug";
 import Shopping from "./components/E-commerce/Shopping";
 import Game from "./components/Game";
+import Pizza from "./components/Pizza";
 
 function App() {
   let cities = [
@@ -49,6 +50,8 @@ function App() {
       </div>
 
       <Game />
+
+      <Pizza />
     </>
   );
 }
