@@ -1,6 +1,12 @@
-function Form() {
+import { FormEvent } from "react";
+
+export default function Form() {
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    console.log("Submitted");
+  }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="mb-3">
         <label htmlFor="name" className="form-label">
           Name
@@ -19,5 +25,3 @@ function Form() {
     </form>
   );
 }
-
-export default Form;
