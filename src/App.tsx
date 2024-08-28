@@ -1,23 +1,24 @@
 // useEffect( () => {} )
 // To execute a piece of code AFTER a component is rendered
 
-import { useEffect, useRef } from "react";
+import { useState } from "react";
+import ProductList from "./components/ProductList";
 
 export default function App() {
-  const ref = useRef<HTMLInputElement>(null);
-
-  // Function inside will be called after each render
-  useEffect(() => {
-    if (ref.current) ref.current.focus();
-  });
-
-  useEffect(() => {
-    document.title = "My App";
-  });
+  const [category, setCategory] = useState("");
 
   return (
     <div>
-      <input ref={ref} type="text" className="form-control" />
+      <select
+        className="form-select"
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        <option value=""></option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">Household</option>
+      </select>
+
+      <ProductList category={category} />
     </div>
   );
 }
