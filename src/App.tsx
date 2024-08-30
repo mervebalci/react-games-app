@@ -1,39 +1,27 @@
-// useEffect( () => {} )
-// To execute a piece of code AFTER a component is rendered
-
+import axios from "axios";
 import { useEffect, useState } from "react";
-import ProductList from "./components/ProductList";
 
-function connect() {
-  console.log("Connecting");
-}
-
-function disconnect() {
-  console.log("Disconnecting");
+interface User {
+  id: number;
+  name: string;
 }
 
 export default function App() {
-  const [category, setCategory] = useState("");
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    connect();
-
-    // Clean up function is optionally returned. It should stop or undo whatever the effect was doing.
-    return () => disconnect();
-  });
+    axios
+      .get<User[]>("http://jsonplaceholder.typicode.com/users")
+      .then((res) => setUsers(res.data));
+  }, []);
 
   return (
     <div>
-      <select
-        className="form-select"
-        onChange={(event) => setCategory(event.target.value)}
-      >
-        <option value=""></option>
-        <option value="Clothing">Clothing</option>
-        <option value="Household">Household</option>
-      </select>
-
-      <ProductList category={category} />
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
