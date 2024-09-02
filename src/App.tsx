@@ -1,6 +1,5 @@
-import axios, { AxiosError } from "axios";
+import axios, { CanceledError } from "axios";
 import { useEffect, useState } from "react";
-
 interface User {
   id: number;
   name: string;
@@ -11,22 +10,23 @@ export default function App() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        /* get method returns a promise.
-        If this promise is resolved, we'll get a response object.
-        If the promise get rejected, we'll get an error.
-        In JS, we can put AWAIT keyword in front of promise to get the result */
-        const res = await axios.get<User[]>(
-          "http://jsonplaceholder.typicode.com/xusers"
-        );
-        setUsers(res.data);
-      } catch (err) {
-        setError((err as AxiosError).message);
-      }
-    };
+    const controller = new AbortController();
 
-    fetchUsers();
+    /* get method returns a promise.
+       If this promise is resolved, we'll get a response object.
+       If the promise get rejected, we'll get an error.
+       In JS, we can put AWAIT keyword in front of promise to get the result */
+    axios
+      .get<User[]>("http://jsonplaceholder.typicode.com/users", {
+        signal: controller.signal,
+      })
+      .then((res) => setUsers(res.data))
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+      });
+
+    return () => controller.abort();
   }, []);
 
   return (
