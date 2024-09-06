@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
-import apiClient, { CanceledError } from "./services/api-client";
-
-interface User {
-  id: number;
-  name: string;
-}
+import { CanceledError } from "./services/api-client";
+import userService, { User } from "./services/user-service";
 
 export default function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -12,18 +8,14 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
-
     setIsLoading(true);
 
     /* get method returns a promise.
        If this promise is resolved, we'll get a response object.
        If the promise get rejected, we'll get an error.
        In JS, we can put AWAIT keyword in front of promise to get the result */
-    apiClient
-      .get<User[]>("/users", {
-        signal: controller.signal,
-      })
+    const { request, cancel } = userService.getAllUsers();
+    request
       .then((res) => {
         setUsers(res.data);
         setIsLoading(false);
@@ -34,7 +26,7 @@ export default function App() {
         setIsLoading(false);
       });
 
-    return () => controller.abort();
+    return () => cancel();
   }, []);
 
   // Deleting a user
@@ -42,7 +34,7 @@ export default function App() {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== user.id));
 
-    apiClient.delete("/users/" + user.id).catch((err) => {
+    userService.deleteUser(user.id).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
@@ -54,8 +46,8 @@ export default function App() {
     const newUser = { id: 0, name: "Efes" };
     setUsers([newUser, ...users]);
 
-    apiClient
-      .post("/users/", newUser)
+    userService
+      .createUser(newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
@@ -69,7 +61,7 @@ export default function App() {
     const updatedUser = { ...user, name: user.name + " ✓" };
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
 
-    apiClient.patch("/users/" + user.id, updatedUser).catch((err) => {
+    userService.updateUser(updatedUser).catch((err) => {
       setError(err.message);
       setUsers(originalUser);
     });
