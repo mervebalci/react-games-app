@@ -1,5 +1,6 @@
 import axios, { CanceledError } from "axios";
 import { useEffect, useState } from "react";
+
 interface User {
   id: number;
   name: string;
@@ -36,6 +37,7 @@ export default function App() {
     return () => controller.abort();
   }, []);
 
+  // Deleting a user
   function deleteUser(user: User) {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== user.id));
@@ -48,6 +50,7 @@ export default function App() {
       });
   }
 
+  // Adding a user
   function addUser() {
     const originalUsers = [...users];
     const newUser = { id: 0, name: "Efes" };
@@ -59,6 +62,23 @@ export default function App() {
       .catch((err) => {
         setError(err.message);
         setUsers(originalUsers);
+      });
+  }
+
+  // Updating a user
+  function updateUser(user: User) {
+    const originalUser = [...users];
+    const updatedUser = { ...user, name: user.name + " ✓" };
+    setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
+
+    axios
+      .patch(
+        "http://jsonplaceholder.typicode.com/users/" + user.id,
+        updatedUser
+      )
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUser);
       });
   }
 
@@ -76,12 +96,20 @@ export default function App() {
             className="list-group-item d-flex justify-content-between"
           >
             {user.name}
-            <button
-              className="btn btn-outline-danger"
-              onClick={() => deleteUser(user)}
-            >
-              Delete
-            </button>
+            <div>
+              <button
+                className="btn btn-outline-secondary mx-2"
+                onClick={() => updateUser(user)}
+              >
+                Update
+              </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
