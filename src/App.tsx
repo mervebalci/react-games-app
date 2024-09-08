@@ -14,7 +14,7 @@ export default function App() {
        If this promise is resolved, we'll get a response object.
        If the promise get rejected, we'll get an error.
        In JS, we can put AWAIT keyword in front of promise to get the result */
-    const { request, cancel } = userService.getAllUsers();
+    const { request, cancel } = userService.getAll<User>();
     request
       .then((res) => {
         setUsers(res.data);
@@ -34,7 +34,7 @@ export default function App() {
     const originalUsers = [...users];
     setUsers(users.filter((u) => u.id !== user.id));
 
-    userService.deleteUser(user.id).catch((err) => {
+    userService.delete(user.id).catch((err) => {
       setError(err.message);
       setUsers(originalUsers);
     });
@@ -47,7 +47,7 @@ export default function App() {
     setUsers([newUser, ...users]);
 
     userService
-      .createUser(newUser)
+      .create(newUser)
       .then(({ data: savedUser }) => setUsers([savedUser, ...users]))
       .catch((err) => {
         setError(err.message);
@@ -57,13 +57,13 @@ export default function App() {
 
   // Updating a user
   function updateUser(user: User) {
-    const originalUser = [...users];
+    const originalUsers = [...users];
     const updatedUser = { ...user, name: user.name + " ✓" };
     setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)));
 
-    userService.updateUser(updatedUser).catch((err) => {
+    userService.update(updatedUser).catch((err) => {
       setError(err.message);
-      setUsers(originalUser);
+      setUsers(originalUsers);
     });
   }
 
