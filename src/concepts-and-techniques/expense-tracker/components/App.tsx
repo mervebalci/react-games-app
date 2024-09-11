@@ -3,7 +3,7 @@ import ExpenseList from "./ExpenseList";
 import ExpenseFilter from "./ExpenseFilter";
 import ExpenseForm from "./ExpenseForm";
 
-export default function ExpenseTrackerApp() {
+export default function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expenses, setExpenses] = useState([
     { id: 1, description: "aaa", amount: 10, category: "Grocery" },
