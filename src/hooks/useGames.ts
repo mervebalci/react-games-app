@@ -18,6 +18,12 @@ export interface Game {
 It is an array of objects where each object has a property called platform of type Platform. */
 
 
-const useGames = (selectedGenre: Genre | null) => useData<Game>("/games", { params: { genres: selectedGenre?.id}}, [selectedGenre?.id]);
+const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null) => 
+  useData<Game>("/games", { 
+    params: { 
+      genres: selectedGenre?.id, 
+      platforms: selectedPlatform?.id 
+    }}, 
+    [selectedGenre?.id, selectedPlatform?.id]);
 
 export default useGames;
