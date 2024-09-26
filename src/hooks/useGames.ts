@@ -13,6 +13,7 @@ export interface Game {
   background_image: string;
   parent_platforms: { platform: Platform} [];
   metacritic: number;
+  rating_top: number;
 }
 /* parent_platform is not Platform[] array.
 It is an array of objects where each object has a property called platform of type Platform. */
